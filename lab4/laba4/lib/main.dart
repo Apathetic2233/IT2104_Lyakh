@@ -24,29 +24,65 @@ class DormitoryPage extends StatefulWidget {
 class _DormitoryPageState extends State<DormitoryPage> {
   int likes = 0;
 
-
-
+  void incrementLikes() {
+    setState(() {
+      likes++;
+    });
+  }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Общежития КубГАУ"),
-          backgroundColor: Colors.lightGreen,),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Image.network(
-                'https://avatars.mds.yandex.net/get-altay/923092/2a000001873ae44bd0c02b417c3da85c73ca/L',
-                height: 350,
-                fit: BoxFit.cover,
-              ),
+      appBar: AppBar(
+        title: Text("Общежития КубГАУ"),
+        backgroundColor: Colors.lightGreen,),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image.network(
+              'https://avatars.mds.yandex.net/get-altay/923092/2a000001873ae44bd0c02b417c3da85c73ca/L',
+              height: 350,
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Общежитие 20",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "г. Краснодар, ул. Калинина 13/20",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.favorite, color: Colors.red),
+                            onPressed: incrementLikes,
+                          ),
+                          Text("$likes"),
+                        ],
+                      ),
+                    ],
+                  ),
 
-            ],
-          ),
-        )
+
+
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
