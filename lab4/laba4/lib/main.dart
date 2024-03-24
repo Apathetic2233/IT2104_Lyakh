@@ -29,8 +29,15 @@ class _DormitoryPageState extends State<DormitoryPage> {
       likes++;
     });
   }
-
-
+  void shareDormitory() {
+    Share.share('Поделиться информацией об общежитии');
+  }
+  void copyAddress() {
+    Clipboard.setData(ClipboardData(text: "г. Краснодар, ул. Калинина 13/20"));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('Адрес скопирован в буфер обмена'),
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +81,48 @@ class _DormitoryPageState extends State<DormitoryPage> {
                       ),
                     ],
                   ),
-
-
-
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.phone, color: Colors.lightGreen),
+                            onPressed: () async{
+                              final Uri url = Uri(
+                                scheme: 'tel',
+                                path: "79628784200",
+                              );
+                              if (await canLaunchUrl(url)){
+                                await launchUrl(url);
+                              } else{
+                                print('Не удалось дозвониться');
+                              }
+                            },
+                          ),
+                          Text('Звонок'),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.directions, color: Colors.lightGreen),
+                            onPressed: copyAddress,
+                          ),
+                          Text('Навигация'),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                              icon: Icon(Icons.share, color: Colors.lightGreen),
+                              onPressed: shareDormitory),
+                          Text('Поделиться'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
