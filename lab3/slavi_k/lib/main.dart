@@ -81,7 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.green,)
               ],
             ),
-            
+             TextButton(
+                onPressed: zero,
+                child: Text('Сбросить', style: TextStyle(color: Colors.grey))
             ),
           ],
         ),
